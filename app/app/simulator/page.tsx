@@ -1,28 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { Bot, TrendingUp, TrendingDown, Zap, Target, Play } from 'lucide-react';
-import { useState } from 'react';
+import { Brain, TrendingUp, Zap, RefreshCw } from 'lucide-react';
 
-const scenarios = [
-    {
-        id: 1,
-        market: 'Bitcoin $100K Aralık 2025?',
-        currentOdds: 68,
-        scenarios: [
-            { condition: 'FED faiz indirimi', probability: 85, impact: '+17%' },
-            { condition: 'ETF onayı', probability: 78, impact: '+12%' },
-            { condition: 'Altseason başlangıcı', probability: 62, impact: '+8%' },
-            { condition: 'Büyük hack olayı', probability: 15, impact: '-25%' },
-        ],
-    },
+const mockScenarios = [
+    { condition: 'FED rate cut', probability: 85, impact: '+15%' },
+    { condition: 'ETF approval', probability: 78, impact: '+12%' },
+    { condition: 'Altseason begins', probability: 62, impact: '+8%' },
+    { condition: 'Major hack event', probability: 15, impact: '-25%' },
 ];
 
 export default function SimulatorPage() {
-    const [selectedMarket, setSelectedMarket] = useState(scenarios[0]);
     const [running, setRunning] = useState(false);
+    const [selectedMarket, setSelectedMarket] = useState('BTC hits $100K by Dec 2025?');
 
     const runSimulation = () => {
         setRunning(true);
@@ -30,210 +22,143 @@ export default function SimulatorPage() {
     };
 
     return (
-        <div className="max-w-6xl mx-auto space-y-8">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-            >
-                <h2 className="text-4xl font-black mb-3">
+        <div className="max-w-7xl mx-auto space-y-8">
+            {/* Header */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <h2 className="text-4xl font-black mb-4">
                     <span className="gradient-text">AI Foresight Simulator</span> 🤖
                 </h2>
-                <p className="text-xl text-gray-400">
-                    Opinion AI ile "what-if" senaryoları test edin ve kazanma şansınızı optimize edin
+                <p className="text-gray-400 text-lg">
+                    Test "what-if" scenarios with Opinion AI and optimize your winning chances
                 </p>
             </motion.div>
 
             {/* How It Works */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-            >
-                <Card className="p-8 bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border-2 border-cyan-500/30">
-                    <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                            <Bot className="w-6 h-6 text-cyan-400" />
-                        </div>
-                        <div>
-                            <h3 className="text-2xl font-bold mb-3">AI Simülasyon Nasıl Çalışır?</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-300">
-                                <div>
-                                    <div className="text-3xl mb-2">📊</div>
-                                    <div className="font-semibold mb-1">Veri Analizi</div>
-                                    <div className="text-sm">Opinion AI, geçmiş verileri ve trend'leri analiz eder</div>
-                                </div>
-                                <div>
-                                    <div className="text-3xl mb-2">🔮</div>
-                                    <div className="font-semibold mb-1">Senaryo Testi</div>
-                                    <div className="text-sm">Farklı koşullar altında outcome probability hesaplanır</div>
-                                </div>
-                                <div>
-                                    <div className="text-3xl mb-2">🎯</div>
-                                    <div className="font-semibold mb-1">Aksiyon Önerisi</div>
-                                    <div className="text-sm">Optimal entry/exit point'ler ve stake miktarı</div>
-                                </div>
-                            </div>
-                        </div>
+            <Card className="p-8 bg-gradient-to-r from-purple-600/10 to-pink-600/10 border-purple-500/30">
+                <Brain className="w-12 h-12 text-purple-400 mb-4" />
+                <h3 className="text-2xl font-bold mb-3">How AI Simulation Works?</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div>
+                        <div className="font-semibold mb-1">1. Data Analysis</div>
+                        <div className="text-sm text-gray-400">Opinion AI analyzes historical data and trends</div>
                     </div>
-                </Card>
-            </motion.div>
-
-            {/* Market Selection */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-            >
-                <Card className="p-6">
-                    <h3 className="text-xl font-bold mb-4">Market Seç</h3>
-                    <div className="glass p-4 rounded-xl flex items-center justify-between">
-                        <div>
-                            <h4 className="font-semibold mb-1">{selectedMarket.market}</h4>
-                            <div className="text-sm text-gray-400">
-                                Current Odds: <span className="text-nexus-accent font-semibold">{selectedMarket.currentOdds}%</span>
-                            </div>
-                        </div>
-                        <Button variant="secondary" size="sm">
-                            Değiştir
-                        </Button>
+                    <div>
+                        <div className="font-semibold mb-1">2. Probability Calculation</div>
+                        <div className="text-sm text-gray-400">Outcome probability calculated under different conditions</div>
                     </div>
-                </Card>
-            </motion.div>
+                    <div>
+                        <div className="font-semibold mb-1">3. Action Recommendation</div>
+                        <div className="text-sm text-gray-400">Optimal entry/exit points and stake amount</div>
+                    </div>
+                </div>
+            </Card>
 
-            {/* Scenario Analysis */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-            >
+            {/* Simulator */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Left: Market Selection */}
                 <Card className="p-8">
-                    <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-2xl font-bold">Senaryo Analizi</h3>
-                        <Button
-                            onClick={runSimulation}
-                            variant="primary"
-                            className={running ? 'animate-pulse' : ''}
-                        >
-                            <Play className="w-5 h-5" />
-                            <span>{running ? 'Simüle Ediliyor...' : 'Simülasyon Başlat'}</span>
-                        </Button>
-                    </div>
-
-                    <div className="space-y-4">
-                        {selectedMarket.scenarios.map((scenario, index) => (
-                            <motion.div
-                                key={scenario.condition}
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 + index * 0.1 }}
-                                className="glass p-6 rounded-xl"
+                    <h3 className="text-xl font-bold mb-4">Select Market</h3>
+                    <div className="space-y-3 mb-6">
+                        {['BTC hits $100K by Dec 2025?', 'ETH ETF approved?', 'AI tokens pump 200%+?'].map((market) => (
+                            <button
+                                key={market}
+                                onClick={() => setSelectedMarket(market)}
+                                className={`w-full text-left p-4 rounded-xl transition-all ${selectedMarket === market ? 'bg-nexus-gradient' : 'glass hover:bg-white/10'
+                                    }`}
                             >
-                                <div className="flex items-center justify-between mb-4">
-                                    <div>
-                                        <h4 className="font-bold text-lg mb-2">{scenario.condition}</h4>
-                                        <div className="flex items-center gap-4 text-sm">
-                                            <div className="flex items-center gap-2">
-                                                <Target className="w-4 h-4 text-nexus-accent" />
-                                                <span className="text-gray-400">
-                                                    Olasılık: <span className="font-semibold text-white">{scenario.probability}%</span>
-                                                </span>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                {scenario.impact.startsWith('+') ? (
-                                                    <TrendingUp className="w-4 h-4 text-green-500" />
-                                                ) : (
-                                                    <TrendingDown className="w-4 h-4 text-red-500" />
-                                                )}
-                                                <span className={`font-semibold ${scenario.impact.startsWith('+') ? 'text-green-500' : 'text-red-500'}`}>
-                                                    {scenario.impact}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Probability Bar */}
-                                <div className="space-y-2">
-                                    <div className="flex justify-between text-xs text-gray-500">
-                                        <span>Düşük</span>
-                                        <span>Yüksek</span>
-                                    </div>
-                                    <div className="h-3 rounded-full bg-white/5 overflow-hidden">
-                                        <motion.div
-                                            initial={{ width: 0 }}
-                                            animate={{ width: running ? `${scenario.probability}%` : 0 }}
-                                            transition={{ duration: 1.5, ease: 'easeOut' }}
-                                            className={`h-full ${scenario.probability > 70
-                                                    ? 'bg-gradient-to-r from-green-500 to-nexus-accent'
-                                                    : scenario.probability > 40
-                                                        ? 'bg-gradient-to-r from-yellow-500 to-orange-500'
-                                                        : 'bg-gradient-to-r from-red-500 to-red-600'
-                                                }`}
-                                        />
-                                    </div>
-                                </div>
-                            </motion.div>
+                                {market}
+                            </button>
                         ))}
                     </div>
+                    <button className="text-nexus-primary hover:text-nexus-secondary transition-colors font-semibold">
+                        Change
+                    </button>
                 </Card>
-            </motion.div>
 
-            {/* AI Recommendation */}
-            {running && (
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                >
-                    <Card className="p-8 bg-gradient-to-r from-green-500/10 to-nexus-accent/10 border-2 border-green-500/30">
-                        <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0 animate-pulse">
-                                <Zap className="w-6 h-6 text-green-400" />
-                            </div>
-                            <div>
-                                <h3 className="text-2xl font-bold mb-3 text-green-400">AI Önerisi</h3>
-                                <div className="space-y-3 text-gray-300">
+                {/* Right: Run Simulation */}
+                <Card className="p-8">
+                    <h3 className="text-xl font-bold mb-4">Run Simulation</h3>
+                    <p className="text-gray-400 mb-6">Test market outcome under different scenarios</p>
+                    <button
+                        onClick={runSimulation}
+                        disabled={running}
+                        className="btn-primary w-full py-4 flex items-center justify-center gap-2"
+                    >
+                        <RefreshCw className={`w-5 h-5 ${running ? 'animate-spin' : ''}`} />
+                        <span>{running ? 'Simulating...' : 'Start Simulation'}</span>
+                    </button>
+                </Card>
+            </div>
+
+            {/* Results */}
+            {!running && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+                    <Card className="p-8">
+                        <h3 className="text-2xl font-bold mb-6">Scenario Analysis</h3>
+                        <div className="space-y-4 mb-8">
+                            {mockScenarios.map((scenario, index) => (
+                                <div key={index} className="flex items-center justify-between p-4 glass rounded-xl">
                                     <div>
-                                        <span className="font-semibold">Optimal Strateji:</span> BUY EVET pozisyonu
+                                        <div className="font-semibold">{scenario.condition}</div>
+                                        <div className="text-sm text-gray-400">
+                                            Probability: <span className="font-semibold text-white">{scenario.probability}%</span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span className="font-semibold">Önerilen Stake:</span> 500-1000 USDT
-                                    </div>
-                                    <div>
-                                        <span className="font-semibold">Kazanma İhtimali:</span> <span className="text-green-400 font-bold">78.3%</span>
-                                    </div>
-                                    <div>
-                                        <span className="font-semibold">Beklenen ROI:</span> <span className="text-nexus-accent font-bold">+42%</span>
-                                    </div>
-                                    <div className="pt-4 border-t border-white/10">
-                                        <p className="text-sm text-gray-400">
-                                            💡 <span className="font-semibold">Insight:</span> FED faiz indirimi ve ETF onayı kombinasyonu %85+ olasılık ile BTC rally'sine sebep olabilir. Erken pozisyon alın.
-                                        </p>
+                                    <div className={`font-bold text-lg ${scenario.impact.startsWith('+') ? 'text-green-500' : 'text-red-500'}`}>
+                                        {scenario.impact}
                                     </div>
                                 </div>
+                            ))}
+                        </div>
+
+                        {/* Overall Probability */}
+                        <div className="mb-8">
+                            <div className="flex justify-between text-sm mb-2">
+                                <span>Low</span>
+                                <span>High</span>
                             </div>
+                            <div className="h-4 rounded-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 relative">
+                                <div className="absolute top-1/2 -translate-y-1/2 left-[78%] w-4 h-4 rounded-full bg-white border-2 border-nexus-dark"></div>
+                            </div>
+                            <div className="text-center mt-3">
+                                <div className="text-sm text-gray-400">Overall Win Probability</div>
+                                <div className="text-3xl font-black gradient-text">78.3%</div>
+                            </div>
+                        </div>
+
+                        {/* AI Recommendation */}
+                        <Card className="p-6 bg-green-500/10 border-green-500/30">
+                            <h3 className="text-2xl font-bold mb-3 text-green-400">AI Recommendation</h3>
+                            <ul className="space-y-2 text-gray-300">
+                                <li className="flex items-start gap-3">
+                                    <Zap className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                                    <div>
+                                        <span className="font-semibold">Suggested Stake:</span> 500-1000 USDT
+                                    </div>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <TrendingUp className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                                    <div>
+                                        <span className="font-semibold">Win Probability:</span> <span className="text-green-400 font-bold">78.3%</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div className="mt-4 p-4 glass rounded-lg">
+                                <div className="text-sm text-gray-300">
+                                    💡 <span className="font-semibold">Insight:</span> FED rate cut and ETF approval combination could cause a BTC rally with 85%+ probability. Take an early position.
+                                </div>
+                            </div>
+                        </Card>
+
+                        {/* Disclaimer */}
+                        <div className="mt-6 p-4 glass rounded-xl text-sm text-gray-400 text-center">
+                            <span className="font-semibold">Note:</span> AI simulations are prediction tools, 100% accuracy not guaranteed.
+                            If simulation is correct, you earn <span className="text-nexus-accent font-semibold">bonus yield</span> and
+                            <span className="text-purple-400 font-semibold"> "Visionary Simulator"</span> badge!
                         </div>
                     </Card>
                 </motion.div>
             )}
-
-            {/* Educational Note */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-            >
-                <Card className="p-6 glass border-2 border-yellow-500/30">
-                    <div className="flex items-start gap-3">
-                        <div className="text-2xl">⚠️</div>
-                        <div className="text-sm text-gray-300">
-                            <span className="font-semibold">Not:</span> AI simülasyonları tahmin aracıdır, %100 doğruluk garanti edilmez.
-                            Simülasyon doğru çıkarsa <span className="text-nexus-accent font-semibold">bonus yield</span> ve
-                            <span className="text-purple-400 font-semibold"> "Visionary Simulator"</span> badge kazanırsınız!
-                        </div>
-                    </div>
-                </Card>
-            </motion.div>
         </div>
     );
 }

@@ -17,9 +17,9 @@ const portfolioData = [
 ];
 
 const activeNodes = [
-    { id: 1, title: 'BTC $100K Aralık 2025?', odds: 68, volume: '$342K', status: 'winning' },
-    { id: 2, title: 'ETH ETF Onaylanacak mı?', odds: 42, volume: '$187K', status: 'losing' },
-    { id: 3, title: 'Trump 2024 seçimlerini kazanır mı?', odds: 55, volume: '$1.2M', status: 'neutral' },
+    { id: 1, title: 'BTC hits $100K by Dec 2025?', odds: 68, volume: '$342K', status: 'winning' },
+    { id: 2, title: 'Will ETH ETF get approved?', odds: 42, volume: '$187K', status: 'losing' },
+    { id: 3, title: 'Trump wins 2024 election?', odds: 55, volume: '$1.2M', status: 'neutral' },
 ];
 
 export default function DashboardPage() {
@@ -30,8 +30,8 @@ export default function DashboardPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
             >
-                <h2 className="text-3xl font-black mb-2">Hoş Geldin, <span className="gradient-text">Tahmin Ustası</span> 🔮</h2>
-                <p className="text-gray-400">Portfolio'nun harika görünüyor! İşte bugünün özeti:</p>
+                <h2 className="text-3xl font-black mb-2">Welcome, <span className="gradient-text">Visionary</span> 🔮</h2>
+                <p className="text-gray-400">Your portfolio looks great! Here's today's summary:</p>
             </motion.div>
 
             {/* Stats Grid */}
@@ -45,7 +45,7 @@ export default function DashboardPage() {
                         <div className="absolute top-0 right-0 w-20 h-20 bg-nexus-primary/20 blur-3xl rounded-full" />
                         <div className="relative">
                             <div className="flex items-center justify-between mb-4">
-                                <span className="text-gray-400 font-medium">Net Değer</span>
+                                <span className="text-gray-400 font-medium">Net Worth</span>
                                 <div className="w-10 h-10 rounded-xl bg-nexus-gradient/20 flex items-center justify-center">
                                     <TrendingUp className="w-5 h-5 text-nexus-primary" />
                                 </div>
@@ -53,7 +53,7 @@ export default function DashboardPage() {
                             <div className="text-3xl font-black mb-2">${(2100).toLocaleString()}</div>
                             <div className="flex items-center gap-2 text-sm">
                                 <span className="text-green-500 font-semibold">+28.4%</span>
-                                <span className="text-gray-500">bu hafta</span>
+                                <span className="text-gray-500">this week</span>
                             </div>
                         </div>
                     </Card>
@@ -66,7 +66,7 @@ export default function DashboardPage() {
                 >
                     <Card>
                         <div className="flex items-center justify-between mb-4">
-                            <span className="text-gray-400 font-medium">Aktif Pozisyonlar</span>
+                            <span className="text-gray-400 font-medium">Active Positions</span>
                             <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center">
                                 <Target className="w-5 h-5 text-purple-400" />
                             </div>
@@ -125,8 +125,8 @@ export default function DashboardPage() {
                 <Card className="p-8">
                     <div className="flex items-center justify-between mb-6">
                         <div>
-                            <h3 className="text-2xl font-bold mb-2">Portfolio Performansı</h3>
-                            <p className="text-gray-400">Son 7 günlük değer grafiği</p>
+                            <h3 className="text-2xl font-bold mb-2">Portfolio Performance</h3>
+                            <p className="text-gray-400">Last 7 days value chart</p>
                         </div>
                         <div className="px-4 py-2 rounded-xl glass">
                             <span className="text-green-500 font-semibold">+$900</span>
@@ -178,9 +178,9 @@ export default function DashboardPage() {
                 transition={{ delay: 0.6 }}
             >
                 <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-2xl font-bold">Aktif Nexus Node'larım</h3>
+                    <h3 className="text-2xl font-bold">My Active Nexus Nodes</h3>
                     <button className="text-nexus-primary hover:text-nexus-secondary transition-colors font-semibold">
-                        Tümünü Gör →
+                        View All →
                     </button>
                 </div>
 
@@ -196,9 +196,9 @@ export default function DashboardPage() {
                                 <div className="flex-1">
                                     <h4 className="font-bold text-lg mb-2">{node.title}</h4>
                                     <div className="flex items-center gap-4 text-sm text-gray-400">
-                                        <span>Hacim: {node.volume}</span>
+                                        <span>Volume: {node.volume}</span>
                                         <span>•</span>
-                                        <span>Şans: %{node.odds}</span>
+                                        <span>Odds: {node.odds}%</span>
                                     </div>
                                 </div>
 
@@ -206,21 +206,21 @@ export default function DashboardPage() {
                                     {node.status === 'winning' && (
                                         <div className="flex items-center gap-2 text-green-500 font-semibold mb-2">
                                             <TrendingUp className="w-5 h-5" />
-                                            <span>Kazanıyor</span>
+                                            <span>Winning</span>
                                         </div>
                                     )}
                                     {node.status === 'losing' && (
                                         <div className="flex items-center gap-2 text-red-500 font-semibold mb-2">
                                             <TrendingDown className="w-5 h-5" />
-                                            <span>Kaybediyor</span>
+                                            <span>Losing</span>
                                         </div>
                                     )}
                                     {node.status === 'neutral' && (
-                                        <div className="text-gray-400 font-semibold mb-2">Beklemede</div>
+                                        <div className="text-gray-400 font-semibold mb-2">Pending</div>
                                     )}
                                     <button className="glass px-4 py-2 rounded-lg text-sm hover:bg-white/10 transition-all flex items-center gap-2">
                                         <Share2 className="w-4 h-4" />
-                                        Paylaş
+                                        Share
                                     </button>
                                 </div>
                             </Card>
@@ -236,23 +236,23 @@ export default function DashboardPage() {
                 transition={{ delay: 0.9 }}
             >
                 <Card className="p-8 bg-nexus-gradient/10 border-2 border-nexus-primary/30">
-                    <h3 className="text-2xl font-bold mb-4">💡 Hızlı Aksiyonlar</h3>
-                    <p className="text-gray-300 mb-6">Bugünün fırsatını kaçırma!</p>
+                    <h3 className="text-2xl font-bold mb-4">💡 Quick Actions</h3>
+                    <p className="text-gray-300 mb-6">Don't miss today's opportunities!</p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <button className="glass p-4 rounded-xl hover:bg-white/10 transition-all text-left">
                             <Sparkles className="w-6 h-6 text-nexus-primary mb-2" />
-                            <div className="font-semibold">Yeni Nexus Yarat</div>
-                            <div className="text-sm text-gray-400">İlk tahminini tokenize et</div>
+                            <div className="font-semibold">Create New Nexus</div>
+                            <div className="text-sm text-gray-400">Tokenize your first prediction</div>
                         </button>
                         <button className="glass p-4 rounded-xl hover:bg-white/10 transition-all text-left">
                             <Bot className="w-6 h-6 text-purple-400 mb-2" />
-                            <div className="font-semibold">AI Simülasyonu</div>
-                            <div className="text-sm text-gray-400">What-if senaryoları test et</div>
+                            <div className="font-semibold">AI Simulation</div>
+                            <div className="text-sm text-gray-400">Test what-if scenarios</div>
                         </button>
                         <button className="glass p-4 rounded-xl hover:bg-white/10 transition-all text-left">
                             <Share2 className="w-6 h-6 text-nexus-accent mb-2" />
-                            <div className="font-semibold">Arkadaş Davet Et</div>
-                            <div className="text-sm text-gray-400">%10 referral bonus kazan</div>
+                            <div className="font-semibold">Invite Friends</div>
+                            <div className="text-sm text-gray-400">Earn 10% referral bonus</div>
                         </button>
                     </div>
                 </Card>
