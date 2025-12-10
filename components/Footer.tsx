@@ -161,6 +161,15 @@ export function Footer() {
                             © {new Date().getFullYear()} Foresight Nexus. All rights reserved.
                             <span className="mx-2">•</span>
                             Built for <span className="text-nexus-primary font-semibold">Opinion Labs</span> ecosystem
+                            <span className="mx-2">•</span>
+                            Built by <a
+                                href="https://github.com/Lesnak1"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-nexus-accent hover:text-nexus-primary transition-colors font-semibold"
+                            >
+                                Leknax
+                            </a>
                         </div>
                         <div className="flex items-center gap-6 text-sm">
                             <span className="text-gray-500">Powered by BNB Chain</span>
