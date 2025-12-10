@@ -8,7 +8,6 @@
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Lesnak1/Foresight-Nexus)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![BNB Chain](https://img.shields.io/badge/BNB%20Chain-Ready-yellow.svg)](https://www.bnbchain.org/)
 [![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js%2014-black)](https://nextjs.org/)
 
 [Live Demo](https://foresight-nexus.vercel.app) • [Documentation](https://docs.opinion.trade) • [Discord](https://discord.gg/opinionlabs)
